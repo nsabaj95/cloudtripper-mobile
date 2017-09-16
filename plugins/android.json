@@ -1,0 +1,72 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "com-sarriaroman-photoviewer": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "cordova-plugin-background-mode": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "cordova-plugin-badge": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "cordova-plugin-facebook4": {
+            "APP_ID": "1871825996431203",
+            "APP_NAME": "cloudtripper",
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "cordova-plugin-nativestorage": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "de.appplant.cordova.plugin.local-notification": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "cordova-plugin-exif": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-app-event": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        }
+    }
+}

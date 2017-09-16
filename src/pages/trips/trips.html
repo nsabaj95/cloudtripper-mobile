@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Viajes</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="listType">
+      <ion-segment-button value="subscriptions" (click)="switchListType('subscriptions')">
+        <!--<ion-icon name="camera"></ion-icon>-->
+        Mis suscripciones <ion-badge ></ion-badge> 
+      </ion-segment-button>
+      <ion-segment-button value="all" (click)="switchListType('all')">
+        <!--<ion-icon name="bookmark"></ion-icon>-->
+        Todos
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="refreshTrips($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <div item-content class="card-background-page" *ngFor="let trip of trips">
+    <ion-card>
+      <button outline class="no-padding" (click)="showTripLogs(trip)">
+      
+        <img [src]="trip.Image"/>
+        <div class="card-title">
+          {{trip.UserName}} in {{trip.Destination}}
+        </div>
+        <div class="card-subtitle">
+          <ion-badge>{{trip.NumberOfLogs}} registros</ion-badge>
+          <ion-badge>{{trip.NumberOfSubscriptions}} suscriptores</ion-badge>
+        </div>
+        <!--<div class="card-dates">
+        {{trip.StartDate.toLocaleString()}} to {{trip.EndDate.toLocaleString()}}
+        </div>-->
+    </button>
+
+      <ion-row>
+        
+        <ion-col *ngIf="!trip.Subscribed">
+          <button ion-button icon-left small class="subscribe-button" clear (click)="subscribe(trip)"  color="secondary">
+            <ion-icon name="add"></ion-icon>
+            Agregar a mis suscripciones
+          </button>
+        </ion-col>
+        <ion-col *ngIf="trip.Subscribed">
+          <button ion-button icon-left small color="danger" clear (click)="unsubscribe(trip)">
+          <ion-icon name="close"></ion-icon>
+          Desuscribir
+      </button>
+        </ion-col>
+        <ion-col *ngIf="trip.Subscribed">
+          <button ion-button icon-left clear small (click)="showTripDetails(trip)">
+          <ion-icon name="eye"></ion-icon>
+          Detalles
+      </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+  </ion-list>
+  
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

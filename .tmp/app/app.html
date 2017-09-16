@@ -1,0 +1,53 @@
+<ion-menu [content]="content">
+  <ion-header >
+    <ion-toolbar class="login-content">
+      <img src="img/icon.png" width="40px" style="margin-left:10px;display:inline-block" height="40px"/>
+      <ion-title class="titleicon" style="display:inline-block">Cloudtripper</ion-title>
+      <!--<img class="title-image" src="img/icon.png" density="ldpi" item-left/>
+      <ion-title> Cloudtripper</ion-title>-->
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-content class="login-content">
+    <ion-item-group *ngIf="usersService.currentUser != undefined">
+      <ion-item>
+        <ion-avatar item-left>
+          <img *ngIf="usersService.currentUser.avatar == '' || usersService.currentUser.avatar == null" src="img/avatar.png">
+          <img *ngIf="usersService.currentUser.avatar != '' && usersService.currentUser.avatar != null" style="object-fit: cover;" [src]="usersService.currentUser.avatar">
+        </ion-avatar>
+        <h2 [innerHtml]="usersService.currentUser.getAlias()"></h2>
+        <p [innerHtml]="usersService.currentUser.text"></p>
+      </ion-item>
+      
+      <!--<ion-item>Angola</ion-item>
+      <ion-item>Argentina</ion-item>-->
+    </ion-item-group>
+    <ion-item-group>
+      <!--<ion-item-divider>Menu</ion-item-divider>-->
+      <button style="opacity:0.8;" menuClose ion-item color="light" *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-icon name="{{p.icon}}"></ion-icon> {{p.title}}
+        <ion-badge color="secondary" *ngIf="p.title == 'Novedades' && tripsSubscriptions.numberOfNews" item-right><div [innerHtml]="tripsSubscriptions.numberOfNews" ></div> news!</ion-badge>
+      </button>
+      <button style="opacity:0.8;" menuClose ion-item color="danger" (click)="signOut()">
+          <ion-icon name="power"></ion-icon> Cerrar sesión
+        </button>
+    </ion-item-group>
+    
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+
+<!--<ion-footer *ngIf="usersService.currentUser != null">
+  <ion-toolbar>
+    <ion-buttons end>
+      <button ion-button icon-right color="royal">
+        Send
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>-->

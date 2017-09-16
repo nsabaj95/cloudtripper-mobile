@@ -1,0 +1,33 @@
+import { ElementRef } from '@angular/core';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { LogsService } from '../../providers/logs-service';
+import { Log } from '../../models/log';
+export declare class LogHistoryPage {
+    navCtrl: NavController;
+    alertCtrl: AlertController;
+    navParams: NavParams;
+    loadingCtrl: LoadingController;
+    logsService: LogsService;
+    mapElement: ElementRef;
+    logs: Log[];
+    take: number;
+    skip: number;
+    loader: any;
+    trip: any;
+    tripMap: any;
+    viewMode: string;
+    enableEditingPermissions: any;
+    constructor(navCtrl: NavController, alertCtrl: AlertController, navParams: NavParams, loadingCtrl: LoadingController, logsService: LogsService);
+    showPhoto(image: any): void;
+    ionViewDidLoad(): void;
+    switchViewMode(viewMode: any): void;
+    loadLogs(): Promise<{}>;
+    refreshLogs(refresher: any): void;
+    logTapped(event: any, item: any): void;
+    delete(id: any): void;
+    doInfinite(infiniteScroll: any): void;
+    loadMap(): void;
+    private loadLogsList(newLogs);
+    private showLoader(message);
+    private setDefaultListValues();
+}

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Usuarios</ion-title>
+  </ion-navbar>
+  <!--<ion-toolbar>
+    <ion-searchbar></ion-searchbar>
+
+  </ion-toolbar>-->
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="refreshUsers($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item-sliding *ngFor="let user of users">
+    <button ion-item (click)="showUser(user)">
+      <ion-avatar item-left>
+          <img style="object-fit:cover;width:100%;" src="img/avatar.png">
+        </ion-avatar>
+        <h2>{{user.username}}</h2>
+    </button>
+    <ion-item-options side="right">
+      <button ion-button color="primary">
+        <ion-icon name="mail"></ion-icon>
+        Mensajes
+      </button>
+    </ion-item-options>
+  </ion-item-sliding> 
+  </ion-list>
+  
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,30 @@
+.item-details-page {
+  div.selection {
+    font-size: 22px;
+    display: block;
+    text-align: center;
+    padding-top: 5%;
+  }
+}
+
+#map {
+    width: 100%;
+    height: 25%;
+}
+
+.title-background {
+
+  .title-div {
+    position: relative;
+    text-align: center;
+  }
+
+  .title-name {
+    position: absolute;
+    top: 36%;
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+  }
+}

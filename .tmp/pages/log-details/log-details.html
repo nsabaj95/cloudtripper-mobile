@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle *ngIf="!selectedLog">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Detalles de registro</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-item text-wrap class="item-borderless">
+    <ion-title>{{selectedLog.title}}</ion-title>
+  </ion-item>
+  <img [src]="base64Image" (tap)="showPhoto(base64Image)" *ngIf="base64Image" />
+  <ion-list-header>
+    Descripción
+  </ion-list-header>
+  <ion-item-group>
+    <ion-item text-wrap>
+      <!--<ion-icon name="calendar" item-left></ion-icon>-->
+      <ion-icon name="calendar" item-left></ion-icon>
+        {{selectedLog.date.toLocaleString()}}
+    </ion-item>
+    <ion-item text-wrap>
+      <ion-icon name="create" item-left></ion-icon>
+      <!--<ion-icon name="create" item-left></ion-icon>-->
+        {{selectedLog.message}}
+    </ion-item>
+  </ion-item-group>
+  <ion-list-header>
+    Ubicación
+  </ion-list-header>
+  <div *ngIf="selectedLog" class="selection">
+    <!--<ion-icon name="{{selectedItem.icon}}"></ion-icon>-->
+  </div>
+  <div #map id="map" *ngIf="showMaps"></div>  
+  
+
+  <!--<ion-item text-wrap>
+    <ion-title>Comentarios</ion-title>
+  </ion-item>
+  <ion-item>
+    <ion-textarea rows="3" type="text" name="text" ></ion-textarea>
+  </ion-item>    
+  <ion-list>
+  <ion-item text-wrap>
+    <ion-avatar item-left>
+      <img src="img/avatar.png">
+    </ion-avatar>
+    <h2>Cher</h2>
+    <p>Hola! Que lindo!</p>
+  </ion-item>-->
+<!--</ion-list>-->
+</ion-content>

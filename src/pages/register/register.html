@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <!--<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>-->
+    <ion-title>Sign up</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    
+  <ion-item style="opacity:0.9;">
+    <ion-label floating>Usuario</ion-label>
+    <ion-input type="text" name="username" [(ngModel)]="username"></ion-input>
+  </ion-item>
+
+  <ion-item style="opacity:0.9;">
+    <ion-label floating>Contraseña</ion-label>
+    <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+  
+</ion-list>
+<ion-grid>
+  <ion-row>
+    <ion-col width-20>
+      <img (tap)="presentAddPictureActionSheet()" [src]="avatar">            
+    </ion-col>
+    <ion-col width-80>
+      <ion-item style="opacity:0.9;">
+        <ion-label stacked>Contanos sobre vos!</ion-label>
+        <ion-textarea rows="6" type="text" name="text" [(ngModel)]="text"></ion-textarea>
+      </ion-item>           
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <button ion-button block (click)="register()">Comencemos!</button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+</ion-content>

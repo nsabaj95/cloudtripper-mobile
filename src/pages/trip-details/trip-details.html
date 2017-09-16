@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle *ngIf="!selectedTrip">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Detalles de viaje</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!--<ion-item text-wrap>
+    <ion-title>{{selectedTrip.Destination}}</ion-title>
+  </ion-item>-->
+
+
+  <div item-content class="title-background">      
+    <div style="height:200px;width:100%;overflow:hidden;" class="title-div">
+      <img [src]="selectedTrip.Image"/>
+      <div class="title-name">
+        {{selectedTrip.Destination}}
+      </div>
+  </div>
+      
+  </div>
+  <!--<div #map id="map" *ngIf="showMaps"></div>  -->
+    
+  <ion-item-group>
+    <ion-list-header>
+      Datos
+    </ion-list-header>
+    <ion-item text-wrap>
+      <ion-icon name="plane" item-left></ion-icon>
+        {{selectedTrip.Origin}} hacia {{selectedTrip.Destination}} 
+    </ion-item>
+    <ion-item text-wrap>
+      <ion-icon name="calendar" item-left></ion-icon>
+        {{selectedTrip.StartDate.toLocaleString()}} a {{selectedTrip.EndDate.toLocaleString()}} 
+    </ion-item>
+    <ion-item>
+      <button color="primary" ion-button icon-left small block (click)="showTripPhotos()">
+        <ion-icon name="image"></ion-icon>
+        <div>Ver imágenes</div>
+      </button> 
+    </ion-item>
+    <!--<ion-item text-wrap>
+      <ion-icon name="create" item-left></ion-icon>
+        {{selectedLog.message}}
+    </ion-item>
+    <ion-item text-wrap>
+      <ion-icon name="image" item-left></ion-icon>
+        <img [src]="base64Image" *ngIf="base64Image" />
+    </ion-item>-->
+  </ion-item-group>
+
+  <ion-list>
+    <ion-list-header>
+      Subscriptores
+    </ion-list-header>
+    <ion-item-sliding *ngFor="let user of subscriptors">
+    <button ion-item >
+      <ion-avatar item-left>
+          <img style="object-fit:cover;width:100%;" src="img/avatar.png">
+        </ion-avatar>
+        <h2>{{user.username}}</h2>
+        <p>{{user.text}}</p>
+    </button>
+    <ion-item-options side="right">
+      <button ion-button color="primary">
+        <ion-icon name="mail"></ion-icon>
+        Mensajes
+      </button>
+    </ion-item-options>
+  </ion-item-sliding> 
+  </ion-list>
+</ion-content>

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Novedades</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  
+    <ion-refresher (ionRefresh)="refreshLogs($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-list>
+      <ion-card *ngFor="let log of logs">
+        <ion-item>
+          <ion-avatar item-left>
+            <img src="img/avatar.png">
+          </ion-avatar>
+          <ion-badge *ngIf="log.isNew(lastUpdate)" color="secondary" item-right>nuevo!</ion-badge>
+          <h3><b>{{log.userName}}</b> in <b>{{log.trip}}</b></h3>
+          <p>{{log.date.toLocaleString()}}</p>
+        </ion-item>
+        <ion-item>
+          <h2>{{log.title}}</h2>
+        </ion-item>
+        <ion-card-content>
+          {{log.message}}
+        </ion-card-content>
+        <img *ngIf="log.image" (tap)="showPhoto(log)" [src]="log.image">
+      <button ion-item (click)="logTapped($event, log)" color="primary">
+        <ion-icon *ngIf="log.positionEnabled" name="map" item-left></ion-icon>               
+        <ion-icon *ngIf="log.hasImage" name="image" item-left></ion-icon>               
+        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright" item-right></ion-icon>
+      </button>
+      </ion-card>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

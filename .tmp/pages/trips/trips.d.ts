@@ -1,0 +1,37 @@
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { TripsService } from '../../providers/trips-service';
+import { TripsSubscriptionsService } from '../../providers/trips-subscriptions-service';
+import { LogsService } from '../../providers/logs-service';
+import { Trip } from '../../models/trip';
+export declare class TripsPage {
+    navCtrl: NavController;
+    logsService: LogsService;
+    tripsSubscriptionsService: TripsSubscriptionsService;
+    navParams: NavParams;
+    loadingCtrl: LoadingController;
+    tripsService: TripsService;
+    trips: Trip[];
+    subscriptions: number[];
+    take: number;
+    skip: number;
+    listType: string;
+    numberOfSubscriptions: number;
+    loader: any;
+    trip_id: any;
+    constructor(navCtrl: NavController, logsService: LogsService, tripsSubscriptionsService: TripsSubscriptionsService, navParams: NavParams, loadingCtrl: LoadingController, tripsService: TripsService);
+    ionViewDidLoad(): void;
+    switchListType(listType: any): void;
+    loadTrips(): Promise<{}>;
+    subscribe(trip: Trip): void;
+    unsubscribe(trip: Trip): void;
+    refreshTrips(refresher: any): void;
+    doInfinite(infiniteScroll: any): void;
+    private isTripSubscribed(trip_id);
+    private loadTripsList(newTrips);
+    showMap(trip_id: any): void;
+    showTripDetails(selectedTrip: any): void;
+    showTripLogs(trip: any): void;
+    showTripPhotos(trip_id: any): void;
+    private setDefaultListValues();
+    private showLoader(message);
+}

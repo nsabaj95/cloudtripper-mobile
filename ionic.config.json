@@ -1,0 +1,8 @@
+{
+  "name": "Cloudtripper",
+  "app_id": "154ae038",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

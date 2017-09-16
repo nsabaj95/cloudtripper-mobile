@@ -1,0 +1,35 @@
+import { ElementRef } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { NavController, AlertController, LoadingController, ActionSheetController, NavParams, ToastController } from 'ionic-angular';
+import { LogsService } from '../../providers/logs-service';
+export declare class LogYourMomentPage {
+    navCtrl: NavController;
+    toastCtrl: ToastController;
+    navParams: NavParams;
+    logsService: LogsService;
+    alertCtrl: AlertController;
+    loadingCtrl: LoadingController;
+    actionSheetCtrl: ActionSheetController;
+    domSanitizer: DomSanitizer;
+    mapElement: ElementRef;
+    map: any;
+    message: string;
+    title: string;
+    sendLocation: boolean;
+    trip_id: any;
+    marker: any;
+    image_native_url: string;
+    image_safe_url: any;
+    dateTime: string;
+    loader: any;
+    constructor(navCtrl: NavController, toastCtrl: ToastController, navParams: NavParams, logsService: LogsService, alertCtrl: AlertController, loadingCtrl: LoadingController, actionSheetCtrl: ActionSheetController, domSanitizer: DomSanitizer);
+    loadMap(): void;
+    setMapPosition(latlng: any): void;
+    presentAddPictureActionSheet(): void;
+    takePicture(pictureSourceType: any): void;
+    showAlert(): void;
+    submit(): void;
+    presentToast(): void;
+    ionViewDidLoad(): void;
+    convertDMSToDD(degrees: any, minutes: any, seconds: any, direction: any): any;
+}

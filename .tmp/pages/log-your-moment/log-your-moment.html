@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Nuevo registro</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background:white;">
+  <form (ngSubmit)="submit()">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Título</ion-label>
+        <ion-input type="text" [(ngModel)]="title" name="Title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Mensaje</ion-label>
+        <ion-textarea rows="6" [(ngModel)]="message" name="Message"></ion-textarea>
+      </ion-item>
+    </ion-list>
+  </form>
+  <ion-item>
+    <ion-icon name="image" item-left></ion-icon>
+    <ion-label>Imágen</ion-label>
+    <button ion-button item-right clear type="button" (click)="presentAddPictureActionSheet()">Seleccionar imágen</button>
+    <!--<img [src]="base64Image" *ngIf="base64Image" />-->
+  </ion-item>
+  <img [src]="image_safe_url" *ngIf="image_safe_url" />
+  <ion-item>
+    <ion-label>Registrar ubicación</ion-label>
+    <ion-checkbox [(ngModel)]="sendLocation" (click)="loadMap()" name="SendLocation" color="blue" checked="true"></ion-checkbox>
+  </ion-item>
+  <div *ngIf="sendLocation" #map id="map"></div>
+  
+</ion-content>
+<ion-footer>
+  <ion-toolbar no-border-top color="primary">
+    <ion-title>Registrar!</ion-title>
+    <ion-buttons end>
+      <button (click)="submit()" ion-button>
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

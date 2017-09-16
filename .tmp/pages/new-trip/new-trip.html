@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>New trip</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="submit()">
+    <ion-grid>
+      <ion-row>
+        <ion-col width-100>
+          <ion-list>
+            <ion-item>
+              <ion-label floating>Origen</ion-label>
+              <ion-input type="text" [(ngModel)]="origin" name="Origin"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Destino</ion-label>
+              <ion-input type="text" [(ngModel)]="destination" name="Destination"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Fecha de inicio</ion-label>
+              <ion-datetime name="startDate" min="2016" max="2018" displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="startDate"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Fecha de fin</ion-label>
+              <ion-datetime name="endDate" min="2016" max="2018" displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [(ngModel)]="endDate"></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="image" item-left></ion-icon>
+              <ion-label>Portada</ion-label>
+              <button ion-button item-right clear type="button" (click)="presentAddPictureActionSheet()">Select picture</button>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <img [src]="base64Image" *ngIf="base64Image" />
+</ion-content>
+<ion-footer>
+  <ion-toolbar no-border-top color="primary">
+    <ion-title>Agregar viaje</ion-title>
+    <ion-buttons end>
+      <button (click)="submit()" ion-button>
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

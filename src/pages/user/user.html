@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Detalles de usuario</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!--<div item-content>
+    <ion-title item-left>My trips</ion-title>
+  </div>
+  -->
+  <!--<button ion-button item-right outline type="button">Select picture</button>-->
+  <!--<ion-item-divider color="primary"><ion-title>Me</ion-title></ion-item-divider>
+    {{user.username}}-->
+
+  <!--<ion-grid>
+    <ion-row>
+      <ion-col width-50><button ion-button (click)="addTrip()">New trip</button></ion-col>
+      <ion-col width-50></ion-col>
+    </ion-row>
+  </ion-grid>-->
+  <!--<ion-item-divider color="primary">
+    <ion-title>Me</ion-title>
+  </ion-item-divider>-->
+  
+  <ion-item-group>
+    <ion-item>
+      <ion-avatar item-left>
+        <img *ngIf="user.avatar == '' || user.avatar == null" src="img/avatar.png">
+        <img *ngIf="user.avatar != '' && user.avatar != null" style="object-fit: cover;" [src]="user.avatar">
+      </ion-avatar>
+      <h2>{{user.getAlias()}}</h2>
+    </ion-item>
+
+    <!--<ion-item>Angola</ion-item>
+      <ion-item>Argentina</ion-item>-->
+  </ion-item-group>
+
+  <!--<ion-item-divider color="primary">
+    <ion-title>
+    <ion-icon name="briefcase" item-left></ion-icon>
+      My trips
+    </ion-title>
+  </ion-item-divider>-->
+  <ion-list>
+    <div item-content class="card-background-page" *ngFor="let trip of trips">
+    <ion-card>
+      <button outline class="no-padding" (click)="showTripLogs(trip)">
+      
+        <img [src]="trip.Image"/>
+        <div class="card-title">
+          {{trip.UserName}} in {{trip.Destination}}
+        </div>
+        <div class="card-subtitle">
+          <ion-badge>{{trip.NumberOfLogs}} registros</ion-badge>
+          <ion-badge>{{trip.NumberOfSubscriptions}} suscriptores</ion-badge>
+        </div>
+        <!--<div class="card-dates">
+        {{trip.StartDate.toLocaleString()}} to {{trip.EndDate.toLocaleString()}}
+        </div>-->
+    </button>
+
+      <ion-row>
+        <ion-col *ngIf="trip.Subscribed">
+          <button ion-button icon-left clear small (click)="showTripPhotos(trip.Id)">
+            <ion-icon name="image"></ion-icon>
+            <div>Imágenes</div>
+          </button>
+        </ion-col>
+        <ion-col *ngIf="!trip.Subscribed">
+          <button ion-button icon-left small class="subscribe-button" clear (click)="subscribe(trip)"  color="secondary">
+            <ion-icon name="add"></ion-icon>
+            Agregar a mis suscripciones
+          </button>
+        </ion-col>
+        <ion-col *ngIf="trip.Subscribed">
+          <button ion-button icon-left small color="danger" clear (click)="unsubscribe(trip)">
+          <ion-icon name="close"></ion-icon>
+          Desuscribir
+      </button>
+        </ion-col>
+        <ion-col *ngIf="trip.Subscribed">
+          <button ion-button icon-left clear small (click)="showTripDetails(trip)">
+          <ion-icon name="eye"></ion-icon>
+          Detalles
+      </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+  </ion-list>
+</ion-content>
+
+<!--
+<ion-content class="card-background-page">
+  <ion-list>
+    <ion-item-group>
+    <ion-content class="card-background-page">
+      <ion-card>
+        <img src="https://www.kimptonhotels.com/blog/wp-content/uploads/2016/01/Amsterdam-Canal-HERO.jpg"/>
+        <div class="card-title">Amsterdam</div>
+        <div class="card-subtitle">64 Listings</div>
+      </ion-card>
+
+    </ion-content>
+  </ion-item-group>
+  </ion-list>
+</ion-content>-->
