@@ -40,10 +40,10 @@ export class TripDetailsPage {
   showTripPhotos(){
     this.showLoader("Getting trip photos...");
     var images = [];
-    this.logsService.getAllLogsByTripId(this.selectedTrip.Id).then((data)=>{
-      var logs = Object.keys(data).map(function(k) { return data[k] })[1];
-      for(let l of logs) {
-        images.push(l.Image);
+    this.logsService.getAllLogsByTripId(this.selectedTrip.Id).then((data: any[])=>{
+      console.log(data);
+      for(let log of data) {
+        images.push(log.image);
       }
       this.loader.dismiss();
       this.navCtrl.push(PhotoShowroomPage, {

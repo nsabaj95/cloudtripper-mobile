@@ -36,7 +36,7 @@
           <p>{{log.date}}</p>
         </ion-item>
         <!-- <img *ngIf="log.image" [src]="log.image" (tap)="showPhoto(log.image)"> -->
-        <img *ngIf="log.image" [src]="log.image" imageViewer>
+        <img *ngIf="log.image" [src]="log.image" (tap)="showPhoto(log)">
         <ion-item>
           <h2>{{log.title}}</h2>
         </ion-item>

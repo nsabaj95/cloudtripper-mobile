@@ -42,23 +42,9 @@ export class MyApp {
   }
 
   initializeApp(tripsSubscriptionsService) {
-    this.usersService = UsersService;
-    this.platform.ready().then(() => {
-      // this.tripsSubscriptionsService.startRefreshing();
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      // NativeStorage.getItem('login')
-      // .then(
-      //   data => { 
-      //     console.log("loaded username: " + data);
-      //     UsersService.currentUser = new User(data.username, data.password, data.id);
-      //   },
-      //   error => console.error(error)
-      // );
-      BackgroundMode.setDefaults({
-        title: "Cloudtripper en modo background",
-        text: "No cierre la aplicación, y le llegarán notificaciones si hay novedades!" 
-      });
+      this.usersService = UsersService;
+      this.platform.ready().then(() => {
+      
       BackgroundMode.enable();
       Badge.registerPermission();
       console.log(Badge.hasPermission());
@@ -69,8 +55,6 @@ export class MyApp {
   }
 
   startGettingNews(tripsSubscriptionsService){
-    
-
     setInterval(function(){
       // console.log(Badge.hasPermission());
       if(UsersService.currentUser != null){

@@ -1,6 +1,6 @@
 import {Component, ViewChild, ElementRef} from '@angular/core';
 import {NavController, NavParams,LoadingController,AlertController} from 'ionic-angular';
-import {PhotoViewer} from 'ionic-native';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 import {LogsService} from '../../providers/logs-service';
 import {UsersService} from '../../providers/users-service';
 import {LogDetailsPage} from '../log-details/log-details';
@@ -23,14 +23,14 @@ export class LogHistoryPage {
   tripMap:any;
   viewMode='history';
   enableEditingPermissions:any;
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController, public logsService: LogsService) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public navParams: NavParams, public loadingCtrl: LoadingController, public logsService: LogsService, private photoViewer : PhotoViewer ) {
     this.trip = navParams.get('trip');
     this.enableEditingPermissions = this.trip.User_Id == UsersService.currentUser.id;
   }
 
-  showPhoto(image){
+  showPhoto(log : Log){
     console.log("show");
-    PhotoViewer.show(image);
+    this.photoViewer.show(log.image, log.title);
   }
 
   ionViewDidLoad(){

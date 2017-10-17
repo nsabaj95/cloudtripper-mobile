@@ -10,7 +10,7 @@
 <ion-content>
   <ion-content>
   <ion-slides>
-    <ion-slide *ngFor="let image of images" style="background-color: black" zoom>
+    <ion-slide *ngFor="let image of images" style="background-color: black">
         <img (tap)="showPhoto(image)" [src]="image"/>
     </ion-slide>
   </ion-slides>

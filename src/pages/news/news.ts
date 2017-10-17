@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams,LoadingController} from 'ionic-angular';
-import {PhotoViewer} from 'ionic-native';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 import {Log} from '../../models/log';
 import {LogsService} from '../../providers/logs-service';
 import {DateTimeHelper} from '../../helpers/dateTimeHelper';
@@ -25,7 +25,7 @@ export class NewsPage {
   minDate = new Date().getFullYear();
   maxDate = new Date().getFullYear() + 2;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public logsService: LogsService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public logsService: LogsService, private photoViewer : PhotoViewer) {
     this.trip_id = navParams.get('trip_id');
   }
 
@@ -74,7 +74,7 @@ export class NewsPage {
 
   showPhoto(log : Log){
     console.log("show");
-    PhotoViewer.show(log.image, log.title);
+    this.photoViewer.show(log.image, log.title);
   }
   
   private loadLogsList(data){
