@@ -73,6 +73,7 @@ export class NewsPage {
   }
 
   showPhoto(log : Log){
+    console.log("show");
     PhotoViewer.show(log.image, log.title);
   }
   

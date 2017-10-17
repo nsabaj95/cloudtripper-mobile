@@ -29,6 +29,7 @@ export class LogHistoryPage {
   }
 
   showPhoto(image){
+    console.log("show");
     PhotoViewer.show(image);
   }
 

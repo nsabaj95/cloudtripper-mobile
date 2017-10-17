@@ -59,6 +59,9 @@
         },
         "cordova-plugin-exif": {
             "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
+        },
+        "info.protonet.imageresizer": {
+            "PACKAGE_NAME": "com.ionicframework.logyourtripmobileapp992808"
         }
     },
     "dependent_plugins": {

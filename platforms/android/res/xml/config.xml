@@ -57,6 +57,9 @@
         <param name="android-package" value="io.ionic.keyboard.IonicKeyboard" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="ImageResizer">
+        <param name="android-package" value="info.protonet.imageresizer.ImageResizer" />
+    </feature>
     <name>Cloudtripper</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -71,6 +74,7 @@
     <preference name="FadeSplashScreenDuration" />
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <allow-navigation href="http://192.168.1.24:8100" />
+    <allow-navigation href="http://192.168.1.12:8100" />
     <allow-intent href="market:*" />
     <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
     <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />

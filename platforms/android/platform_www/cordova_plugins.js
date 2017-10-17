@@ -354,6 +354,14 @@ module.exports = [
         "clobbers": [
             "window.CordovaExif"
         ]
+    },
+    {
+        "id": "info.protonet.imageresizer.ImageResizer",
+        "file": "plugins/info.protonet.imageresizer/www/image_resizer.js",
+        "pluginId": "info.protonet.imageresizer",
+        "clobbers": [
+            "ImageResizer"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -377,7 +385,8 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.3.0",
     "de.appplant.cordova.plugin.local-notification": "0.8.4",
     "ionic-plugin-keyboard": "2.2.1",
-    "cordova-plugin-exif": "1.0.0"
+    "cordova-plugin-exif": "1.0.0",
+    "info.protonet.imageresizer": "0.1.1"
 };
 // BOTTOM OF METADATA
 });

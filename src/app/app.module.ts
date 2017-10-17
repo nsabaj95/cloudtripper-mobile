@@ -1,4 +1,5 @@
 // import { IonicImageViewerModule } from 'ionic-img-viewer';
+import { ImageResizer } from '@ionic-native/image-resizer';
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -61,7 +62,9 @@ import { HttpModule} from '@angular/http';
     UsersPage,
     UserPage
   ],
-  providers: []
+  providers: [
+    ImageResizer
+  ]
 })
 
 export class AppModule {}

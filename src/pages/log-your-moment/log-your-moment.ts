@@ -5,6 +5,7 @@ import {NavController, AlertController,LoadingController,ActionSheetController,N
 import {Geolocation,Camera} from 'ionic-native';
 import {LogsService} from '../../providers/logs-service';
 import {HomePage} from '../home/home';
+import { ImageResizer,ImageResizerOptions } from '@ionic-native/image-resizer';
 
 declare var google;
 declare let CordovaExif: any;
@@ -31,14 +32,16 @@ export class LogYourMomentPage {
 
   // public uploader:FileUploader;
   loader:any;
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public navParams: NavParams, public logsService: LogsService, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public domSanitizer:DomSanitizer) {
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public navParams: NavParams, public logsService: LogsService, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public domSanitizer:DomSanitizer, public imageResizer:ImageResizer) {
     this.trip_id = navParams.get('trip_id');
     this.loader = this.loadingCtrl.create({
       content: "Agregando nuevo registro..."
     });
     this.dateTime = new Date().toISOString();
   }
-
+  ionViewDidLoad(){
+    this.loadMap();
+  }
   loadMap(){
     Geolocation.getCurrentPosition().then((position) => {
       if(this.sendLocation){
@@ -58,7 +61,6 @@ export class LogYourMomentPage {
       console.log(err);
     });  
   }
-
   setMapPosition(latlng){
     if(this.marker != undefined){
       this.marker.setPosition(latlng);
@@ -73,7 +75,6 @@ export class LogYourMomentPage {
     this.map.panTo(latlng);
     console.log(this.marker);
   }
-
   presentAddPictureActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Agregar una imágen',
@@ -100,53 +101,34 @@ export class LogYourMomentPage {
     Camera.getPicture({
         destinationType: Camera.DestinationType.NATIVE_URI,
         sourceType: pictureSourceType
-    }).then((imageData) => {
-      var analizandoImagenLoader = this.loadingCtrl.create({
-        content: "Analizando imágen..."
-      });
-      analizandoImagenLoader.present();
-      this.image_safe_url = this.domSanitizer.bypassSecurityTrustUrl(imageData);
-      this.image_native_url = imageData;
-      CordovaExif.readData(this.image_native_url, (exifObject) => {
-        var gpsLatitude = exifObject.GPSLatitude;
-        var gpsLongitude = exifObject.GPSLongitude;
-        analizandoImagenLoader.dismiss();
-        if((gpsLatitude != undefined && gpsLongitude != undefined) || exifObject.DateTimeOriginal != undefined){
-          var importandoInformacionLoader = this.loadingCtrl.create({
-            content: "Importando información de imágen..."
-          });
-          importandoInformacionLoader.present();
-          if(gpsLatitude != undefined && gpsLongitude != undefined){
-            console.log("importando gps lat");
-            var lat = this.convertDMSToDD(gpsLatitude[0].numerator / gpsLatitude[0].denominator,
-              gpsLatitude[1].numerator / gpsLatitude[1].denominator, 
-              gpsLatitude[2].numerator / gpsLatitude[2].denominator, 
-              exifObject.GPSLatitudeRef);
-              console.log("importando gps lng");
-            var lng = this.convertDMSToDD(gpsLongitude[0].numerator / gpsLongitude[0].denominator,
-              gpsLongitude[1].numerator / gpsLongitude[1].denominator, 
-              gpsLongitude[2].numerator / gpsLongitude[2].denominator, 
-              exifObject.GPSLongitudeRef);
-            var latlng = new google.maps.LatLng(lat, lng);
-            this.setMapPosition(latlng);
-          }
-          if(exifObject.DateTimeOriginal != undefined){
-            console.log("importando horario");
-            var dateTimeArray = exifObject.DateTimeOriginal.split(" ");
-            var dateArray = dateTimeArray[0].split(":");
-            var timeArray = dateTimeArray[1].split(":");
-            var date = new Date(dateArray[0], dateArray[1], dateArray[2], timeArray[0], timeArray[1], timeArray[2]);
-            this.dateTime = date.toISOString();
-          }
-          importandoInformacionLoader.dismiss();
-        }
-      });
+    }).then((image) => {
+      console.log("Getting exif data...");
+      this.getExifData(image);
+      console.log("Setting resizing options...");
+      let options = {
+        uri: image,
+        folderName: 'resizedImages',
+        quality: 50,
+        width: 1280,
+        height: 1280
+       } as ImageResizerOptions;
+       console.log("Resizing...");
+       this.imageResizer
+         .resize(options)
+         .then((filePath: string) => {
+          console.log(filePath);
+          console.log("Resizing finished...");
+          //  this.image_safe_url = this.domSanitizer.bypassSecurityTrustUrl(filePath);
+          this.image_safe_url = filePath;
+          this.image_native_url = filePath;
+        }) 
+        .catch(e => console.log(e));
     }, (err) => {
       console.log(err);
     });
   }
 
-  showAlert() {
+  private showAlert() {
     let alert = this.alertCtrl.create({
         title: 'Success!',
         subTitle: 'Your log message has been sent!',
@@ -190,10 +172,48 @@ export class LogYourMomentPage {
     });
     toast.present();
   }
-  ionViewDidLoad(){
-    this.loadMap();
+  
+  private getExifData(filePath){
+    var analizandoImagenLoader = this.loadingCtrl.create({
+      content: "Analizando imágen..."
+    });
+    analizandoImagenLoader.present();
+    CordovaExif.readData(filePath, (exifObject) => {
+      var gpsLatitude = exifObject.GPSLatitude;
+      var gpsLongitude = exifObject.GPSLongitude;
+      analizandoImagenLoader.dismiss();
+      if((gpsLatitude != undefined && gpsLongitude != undefined) || exifObject.DateTimeOriginal != undefined){
+        var importandoInformacionLoader = this.loadingCtrl.create({
+          content: "Importando información de imágen..."
+        });
+        importandoInformacionLoader.present();
+        if(gpsLatitude != undefined && gpsLongitude != undefined){
+          console.log("importando gps lat");
+          var lat = this.convertDMSToDD(gpsLatitude[0].numerator / gpsLatitude[0].denominator,
+            gpsLatitude[1].numerator / gpsLatitude[1].denominator, 
+            gpsLatitude[2].numerator / gpsLatitude[2].denominator, 
+            exifObject.GPSLatitudeRef);
+            console.log("importando gps lng");
+          var lng = this.convertDMSToDD(gpsLongitude[0].numerator / gpsLongitude[0].denominator,
+            gpsLongitude[1].numerator / gpsLongitude[1].denominator, 
+            gpsLongitude[2].numerator / gpsLongitude[2].denominator, 
+            exifObject.GPSLongitudeRef);
+          var latlng = new google.maps.LatLng(lat, lng);
+          this.setMapPosition(latlng);
+        }
+        if(exifObject.DateTimeOriginal != undefined){
+          console.log("importando horario");
+          var dateTimeArray = exifObject.DateTimeOriginal.split(" ");
+          var dateArray = dateTimeArray[0].split(":");
+          var timeArray = dateTimeArray[1].split(":");
+          var date = new Date(dateArray[0], dateArray[1], dateArray[2], timeArray[0], timeArray[1], timeArray[2]);
+          this.dateTime = date.toISOString();
+        }
+        importandoInformacionLoader.dismiss();
+      }
+    });
   }
-  convertDMSToDD(degrees, minutes, seconds, direction) {
+  private convertDMSToDD(degrees, minutes, seconds, direction) {
     var dd = degrees + minutes/60 + seconds/(60*60);
     if (direction == "S" || direction == "W") {
         dd = dd * -1;

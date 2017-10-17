@@ -1,0 +1,99 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "info.protonet.imageresizer",
+        "scope": null,
+        "escapedName": "info.protonet.imageresizer",
+        "name": "info.protonet.imageresizer",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/home/nicolas/projects/cloudtripper/cloudtripper-frontend/node_modules"
+    ]
+  ],
+  "_from": "info.protonet.imageresizer@latest",
+  "_id": "info.protonet.imageresizer@0.1.1",
+  "_inCache": true,
+  "_location": "/info.protonet.imageresizer",
+  "_nodeVersion": "7.5.0",
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/info.protonet.imageresizer-0.1.1.tgz_1494868575159_0.2784602155443281"
+  },
+  "_npmUser": {
+    "name": "rteran",
+    "email": "rafaelterantorralbo@gmail.com"
+  },
+  "_npmVersion": "4.1.2",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "info.protonet.imageresizer",
+    "scope": null,
+    "escapedName": "info.protonet.imageresizer",
+    "name": "info.protonet.imageresizer",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/info.protonet.imageresizer/-/info.protonet.imageresizer-0.1.1.tgz",
+  "_shasum": "a43be699843abde5f0b8599dc825e662e3fc4720",
+  "_shrinkwrap": null,
+  "_spec": "info.protonet.imageresizer",
+  "_where": "/home/nicolas/projects/cloudtripper/cloudtripper-frontend/node_modules",
+  "author": {
+    "name": "RTeran"
+  },
+  "bugs": {
+    "url": "https://github.com/RTeran/cordova-plugin-image-resizer/issues"
+  },
+  "cordova": {
+    "id": "info.protonet.imageresizer",
+    "platforms": [
+      "android",
+      "ios",
+      "windows"
+    ]
+  },
+  "dependencies": {},
+  "description": "Plugin for resizing images only with the uri of the image.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "a43be699843abde5f0b8599dc825e662e3fc4720",
+    "tarball": "https://registry.npmjs.org/info.protonet.imageresizer/-/info.protonet.imageresizer-0.1.1.tgz"
+  },
+  "gitHead": "2dcc537a42ae510d876ba858b122e5ca95923e49",
+  "homepage": "https://github.com/RTeran/cordova-plugin-image-resizer#readme",
+  "keywords": [
+    "cordova",
+    "device",
+    "resize",
+    "image",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "cordova-windows"
+  ],
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "rteran",
+      "email": "rafaelterantorralbo@gmail.com"
+    }
+  ],
+  "name": "info.protonet.imageresizer",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://RTeran@github.com/RTeran/cordova-plugin-image-resizer.git"
+  },
+  "scripts": {},
+  "version": "0.1.1"
+}
