@@ -3,7 +3,7 @@
   <div style="text-align:center;height:45%;">
     <img src="img/icon-l.png" style="margin-top:5%;"/>
     <ion-title style="margin-top:10px;">Iniciar sesión</ion-title>
-    <p>O registrarse.</p>
+    <!-- <p>O registrarse.</p> -->
   </div>
   <ion-list>
 
@@ -33,7 +33,10 @@
   </ion-row>
   <ion-row>
     <ion-col>
-      <button ion-button block (click)="facebookLogin()">Ingresar con Facebook</button>
+      <button ion-button block icon-left (click)="facebookLogin()">
+          <ion-icon name="logo-facebook"></ion-icon>
+        Ingresar con Facebook
+      </button>
     </ion-col>
     
   </ion-row>

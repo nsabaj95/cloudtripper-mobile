@@ -44,7 +44,6 @@ export class HomePage {
     this.loader.present();
     return new Promise(resolve => {
       this.tripsService.getAllTripsByUser(UsersService.currentUser.id).then((trips : any[]) => {
-        console.log(trips);
         for(let t of trips) {
           let trip:Trip = new Trip(t.id, t.active, t.destination, t.origin, new Date(t.startDate), new Date(t.endDate), new Date(t.lastUpdate), t.numberOfLogs, t.user_id, t.hasImage, t.image, t.numberOfSubscriptions);
           this.trips.push(trip);

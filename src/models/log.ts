@@ -10,10 +10,10 @@ export class Log {
     position_lng:string;
     hasImage:boolean;
     image:string;
-
+    address:string;
     userName;
     trip;
-    constructor(id, title, message, positionEnabled, date, position_lat, position_lng, hasImage,image){
+    constructor(id, title, message, positionEnabled, date, position_lat, position_lng, hasImage,image,address){
         this.id = id;
         this.title = title;
         this.message = message;
@@ -23,6 +23,7 @@ export class Log {
         this.position_lng = position_lng;
         this.hasImage = hasImage;
         this.image = image;
+        this.address = address;
     }
 
     isNew(lastUpdate){

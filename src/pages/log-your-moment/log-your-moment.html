@@ -9,7 +9,7 @@
 
 <ion-content style="background:white;">
   <form (ngSubmit)="submit()">
-    <ion-list>
+    <ion-list style="margin-bottom:0px;">
       <ion-item>
         <ion-label floating>Título</ion-label>
         <ion-input type="text" [(ngModel)]="title" name="Title"></ion-input>
@@ -18,20 +18,27 @@
         <ion-label floating>Mensaje</ion-label>
         <ion-textarea rows="6" [(ngModel)]="message" name="Message"></ion-textarea>
       </ion-item>
+      <ion-item no-lines>
+        <ion-icon name="image" item-left></ion-icon>
+        <ion-label>Imágen</ion-label>
+        <button ion-button item-right clear type="button" (click)="presentAddPictureActionSheet()">Seleccionar imágen</button>
+      </ion-item>
+      <img [src]="image_safe_url" *ngIf="image_safe_url" />
+      <ion-item no-lines>
+        <ion-icon name="compass" item-left></ion-icon>
+        <!-- <ion-label>Registrar ubicación</ion-label> -->
+        <!-- <ion-checkbox [(ngModel)]="sendLocation" (click)="loadMap()" name="SendLocation" color="blue" checked="true"></ion-checkbox> -->
+        <ion-label name="address">{{address}}</ion-label>
+        <button ion-button item-right clear type="button" (click)="showAddressModal()">Seleccionar una ubicación</button>
+      </ion-item>
+      <!-- <ion-item no-lines *ngIf="sendLocation">
+        <ion-icon name="compass" item-left></ion-icon>
+        <ion-label name="address">{{address}}</ion-label>
+      </ion-item> -->
     </ion-list>
   </form>
-  <ion-item>
-    <ion-icon name="image" item-left></ion-icon>
-    <ion-label>Imágen</ion-label>
-    <button ion-button item-right clear type="button" (click)="presentAddPictureActionSheet()">Seleccionar imágen</button>
-    <!--<img [src]="base64Image" *ngIf="base64Image" />-->
-  </ion-item>
-  <img [src]="image_safe_url" *ngIf="image_safe_url" />
-  <ion-item>
-    <ion-label>Registrar ubicación</ion-label>
-    <ion-checkbox [(ngModel)]="sendLocation" (click)="loadMap()" name="SendLocation" color="blue" checked="true"></ion-checkbox>
-  </ion-item>
-  <div *ngIf="sendLocation" #map id="map"></div>
+  <div *ngIf="sendLocation" style="height:40%" #map id="map"></div>
+  
   
 </ion-content>
 <ion-footer>

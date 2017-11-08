@@ -18,6 +18,7 @@ import { NewsPage } from '../pages/news/news';
 import { RegisterPage } from '../pages/register/register';
 import { UsersPage } from '../pages/users/users';
 import { UserPage } from '../pages/user/user';
+import {AddressAutocompletePage} from '../pages/address-autocomplete/address-autocomplete';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule} from '@angular/http';
 
@@ -37,7 +38,8 @@ import { HttpModule} from '@angular/http';
     NewsPage,
     RegisterPage,
     UsersPage,
-    UserPage
+    UserPage,
+    AddressAutocompletePage
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ import { HttpModule} from '@angular/http';
     NewsPage,
     RegisterPage,
     UsersPage,
-    UserPage
+    UserPage,
+    AddressAutocompletePage
   ],
   providers: [
     ImageResizer,

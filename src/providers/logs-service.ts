@@ -31,7 +31,7 @@ export class LogsService {
     return this.getLogs('?skip=' + encodeURIComponent(skip) + '&take=' + encodeURIComponent(take) + '&subscriptor_id=' + encodeURIComponent(subscriptor_id) + '&updateDate=' + encodeURIComponent(updateDate));
   }
 
-  uploadImage(title, message, positionEnabled, lat, lng, date, imgUrl, trip_id) {
+  uploadImage(title, message, positionEnabled, lat, lng, date, imgUrl, trip_id, address) {
     let ft = new Transfer();
     let filename = "img.jpg";
     let fileOptions = {
@@ -50,7 +50,8 @@ export class LogsService {
         latitude: lat,
         longitude: lng,
         trip_id: trip_id,
-        date: date
+        date: date,
+        address: address
       }
     };
     return new Promise(resolve => {
@@ -75,13 +76,13 @@ export class LogsService {
     console.log('cargando');
   }
 
-  addLog(title, message, positionEnabled, lat, lng, date, imgUrl, trip_id) {
+  addLog(title, message, positionEnabled, lat, lng, date, imgUrl, trip_id, address) {
     lng = lng.replace(",", ".");
     lat = lat.replace(",", ".")
     if (imgUrl != undefined) {
-      return this.uploadImage(title, message, positionEnabled, lat, lng, date, imgUrl, trip_id);
+      return this.uploadImage(title, message, positionEnabled, lat, lng, date, imgUrl, trip_id, address);
     } else {
-      var data = JSON.stringify({ title: title, message: message, positionEnabled: positionEnabled, date: date, latitude: lat, longitude: lng, trip_id: trip_id });
+      var data = JSON.stringify({ title: title, message: message, positionEnabled: positionEnabled, date: date, latitude: lat, longitude: lng, trip_id: trip_id, address: address });
       return new Promise(resolve => {
         this.http.post(this.apiurl, data)
           .subscribe(data => {

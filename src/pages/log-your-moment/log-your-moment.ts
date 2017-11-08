@@ -1,10 +1,11 @@
 import {DateTimeHelper} from '../../helpers/dateTimeHelper';
 import {Component, ViewChild, ElementRef} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {NavController, AlertController,LoadingController,ActionSheetController,NavParams,ToastController} from 'ionic-angular';
+import {ModalController, NavController, AlertController,LoadingController,ActionSheetController,NavParams,ToastController} from 'ionic-angular';
 import {Geolocation,Camera} from 'ionic-native';
 import {LogsService} from '../../providers/logs-service';
 import {HomePage} from '../home/home';
+import {AddressAutocompletePage} from '../address-autocomplete/address-autocomplete';
 import { ImageResizer,ImageResizerOptions } from '@ionic-native/image-resizer';
 
 declare var google;
@@ -20,6 +21,7 @@ declare let CordovaExif: any;
 export class LogYourMomentPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
+  address = '';
   message = '';
   title = '';
   sendLocation = true;
@@ -32,7 +34,7 @@ export class LogYourMomentPage {
 
   // public uploader:FileUploader;
   loader:any;
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public navParams: NavParams, public logsService: LogsService, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public domSanitizer:DomSanitizer, public imageResizer:ImageResizer) {
+  constructor(public navCtrl: NavController, public modalCtrl : ModalController, public toastCtrl: ToastController, public navParams: NavParams, public logsService: LogsService, public alertCtrl: AlertController, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public domSanitizer:DomSanitizer, public imageResizer:ImageResizer) {
     this.trip_id = navParams.get('trip_id');
     this.loader = this.loadingCtrl.create({
       content: "Agregando nuevo registro..."
@@ -45,6 +47,10 @@ export class LogYourMomentPage {
   loadMap(){
     Geolocation.getCurrentPosition().then((position) => {
       if(this.sendLocation){
+        // var input = this.searchBox;
+        // var searchBox = new google.maps.places.SearchBox(input);
+        // this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
         let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         let mapOptions = {
           center: latLng,
@@ -54,6 +60,19 @@ export class LogYourMomentPage {
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
         this.setMapPosition(latLng);
         this.map.addListener('click', (e) => {
+          var geocoder = new google.maps.Geocoder();
+          geocoder.geocode({'location': e.latLng}, (results, status) => {
+            if (status === 'OK') {
+              if (results[1]) {
+                this.address = results[1].formatted_address;
+                console.log(this.address);
+              } else {
+                alert('No results found');
+              }
+            } else {
+              alert('Geocoder failed due to: ' + status);
+            }
+          });
           this.marker.setPosition(e.latLng);
         });
       }
@@ -63,7 +82,7 @@ export class LogYourMomentPage {
   }
   setMapPosition(latlng){
     if(this.marker != undefined){
-      this.marker.setPosition(latlng);
+      this.marker.setPosition(latlng);    
     }
     else{
       this.marker = new google.maps.Marker({
@@ -148,7 +167,7 @@ export class LogYourMomentPage {
         lng = this.marker.position.lng().toString().replace('.',',');
         // console.log();
         // console.log(new Date().toISOString());
-        this.logsService.addLog(this.title, this.message, this.sendLocation, lat, lng, dateTime, this.image_native_url, this.trip_id)
+        this.logsService.addLog(this.title, this.message, this.sendLocation, lat, lng, dateTime, this.image_native_url, this.trip_id, this.address)
         .then((data) => {
           this.loader.dismiss();
           this.presentToast();
@@ -156,7 +175,7 @@ export class LogYourMomentPage {
         });
       // });
     } else{
-      this.logsService.addLog(this.title,  this.message, this.sendLocation, lat, lng, dateTime, this.image_native_url, this.trip_id)
+      this.logsService.addLog(this.title,  this.message, this.sendLocation, lat, lng, dateTime, this.image_native_url, this.trip_id, this.address)
       .then((data)=>{
         this.loader.dismiss();
         this.presentToast();
@@ -212,6 +231,16 @@ export class LogYourMomentPage {
         importandoInformacionLoader.dismiss();
       }
     });
+  }
+  showAddressModal () {
+    let modal = this.modalCtrl.create(AddressAutocompletePage);
+    let me = this;
+    modal.onDidDismiss(data => {
+      console.log(data);
+      this.address = data.place;
+      this.setMapPosition(new google.maps.LatLng(data.lat, data.lng));
+    });
+    modal.present();
   }
   private convertDMSToDD(degrees, minutes, seconds, direction) {
     var dd = degrees + minutes/60 + seconds/(60*60);

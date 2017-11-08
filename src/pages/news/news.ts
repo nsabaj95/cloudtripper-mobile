@@ -81,7 +81,7 @@ export class NewsPage {
     // var minutesOffset:number = new Date().getTimezoneOffset();
     var newLogs = data;
     for(let log of newLogs) {
-      let newLog:Log = new Log(log.id, log.title, log.message, log.locationEnabled == 1 ? true : false, DateTimeHelper.getLocalDateFromUTC(log.date), log.latitude, log.longitude, log.hasImage == 1 ? true : false, log.image);
+      let newLog:Log = new Log(log.id, log.title, log.message, log.locationEnabled == 1 ? true : false, DateTimeHelper.getLocalDateFromUTC(log.date), log.latitude, log.longitude, log.hasImage == 1 ? true : false, log.image,log.address);
       newLog.userName = log.username;
       newLog.trip = log.destination;
       this.logs.push(newLog);

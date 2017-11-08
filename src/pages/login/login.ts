@@ -28,8 +28,6 @@ export class LoginPage {
       NativeStorage.getItem('login')
       .then(
         user => { 
-          console.log("stored login")
-          console.log(user);
           this.loader = this.loadingCtrl.create({
             content: "Ingresando..."
           });
@@ -61,11 +59,8 @@ export class LoginPage {
         .then((user) => {
           user.picture = "https://graph.facebook.com/" + facebookid + "/picture?type=square";
           this.usersService.facebookLogin(facebookid).then((u:User) => {
-            console.log(u);
             if(u == undefined){
               this.usersService.facebookRegister(user.picture, facebookid, user.name).then((id)=>{
-                console.log("Registering facebook user...");
-                console.log(id);
                 u = new User("", "", id, "", facebookid, user.picture, user.name);
                 this.login(u);
               });
@@ -109,8 +104,6 @@ export class LoginPage {
   }
 
   private login(user){
-    console.log("Logging user...");
-    console.log(user);
     UsersService.currentUser = user;
     this.data = user;
 
@@ -121,7 +114,6 @@ export class LoginPage {
     this.tripsSubscriptionsService.getNumberOfNews(UsersService.currentUser.lastUpdate, UsersService.currentUser.id)
       .then((data)=>{
         TripsSubscriptionsService.numberOfNews=data;
-        console.log("News at login time: " + TripsSubscriptionsService.numberOfNews);
         Badge.set(TripsSubscriptionsService.numberOfNews);
         this.loader.dismiss();
         this.navCtrl.setRoot(HomePage);

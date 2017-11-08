@@ -34,6 +34,7 @@
           <button item-right ion-button *ngIf="enableEditingPermissions" color="danger" outline (click)="delete(log.id)"> <ion-icon name="trash"></ion-icon></button>
           <h3><b>{{log.userName}}</b> in <b>{{log.trip}}</b></h3>
           <p>{{log.date}}</p>
+          <p>{{log.address}}</p>
         </ion-item>
         <!-- <img *ngIf="log.image" [src]="log.image" (tap)="showPhoto(log.image)"> -->
         <img *ngIf="log.image" [src]="log.image" (tap)="showPhoto(log)">

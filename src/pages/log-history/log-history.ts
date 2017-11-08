@@ -163,7 +163,7 @@ export class LogHistoryPage {
 
   private loadLogsList(newLogs : any[]){
     for(let log of newLogs) {
-      let newLog:Log = new Log(log.id, log.title, log.message, log.locationEnabled == 1 ? true : false, DateTimeHelper.getLocalDateFromUTC(log.date), log.latitude, log.longitude, log.hasImage == 1 ? true : false, log.image);
+      let newLog:Log = new Log(log.id, log.title, log.message, log.locationEnabled == 1 ? true : false, DateTimeHelper.getLocalDateFromUTC(log.date), log.latitude, log.longitude, log.hasImage == 1 ? true : false, log.image, log.address);
       newLog.userName = log.username != undefined ? log.username : log.name;
       newLog.trip = log.destination;
       this.logs.push(newLog);
