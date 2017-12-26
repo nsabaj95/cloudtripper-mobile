@@ -3,29 +3,11 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Me</ion-title>
+    <ion-title>Mi perfil</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <!--<div item-content>
-    <ion-title item-left>My trips</ion-title>
-  </div>
-  -->
-  <!--<button ion-button item-right outline type="button">Select picture</button>-->
-  <!--<ion-item-divider color="primary"><ion-title>Me</ion-title></ion-item-divider>
-    {{user.username}}-->
-
-  <!--<ion-grid>
-    <ion-row>
-      <ion-col width-50><button ion-button (click)="addTrip()">New trip</button></ion-col>
-      <ion-col width-50></ion-col>
-    </ion-row>
-  </ion-grid>-->
-  <!--<ion-item-divider color="primary">
-    <ion-title>Me</ion-title>
-  </ion-item-divider>-->
-
   <ion-item-group>
     <ion-item>
       <ion-avatar item-left>
@@ -34,71 +16,71 @@
       </ion-avatar>
       <h2>{{user.getAlias()}}</h2>
     </ion-item>
-
-    <!--<ion-item>Angola</ion-item>
-      <ion-item>Argentina</ion-item>-->
   </ion-item-group>
 
-  <!--<ion-item-divider color="primary">
-    <ion-title>
-    <ion-icon name="briefcase" item-left></ion-icon>
-      My trips
-    </ion-title>
-  </ion-item-divider>-->
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center style="height:75px;background-color:#3185FC;vertical-align: middle;">
+        <h4>
+          <ion-icon name="briefcase"></ion-icon> Mis viajes
+        </h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center style="height:75px;background-color:#A682FF;vertical-align: middle;" (click)="addLog(lastTrip.Id)">
+        <h4>
+          <ion-icon name="pin"></ion-icon> Nuevo registro
+        </h4>
+      </ion-col>
+      <ion-col text-center style="height:75px;background-color:#715AFF;vertical-align: middle;" (click)="addTrip()">
+        <h4>
+          <ion-icon name="add"></ion-icon> Nuevo viaje
+        </h4>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center *ngIf="lastTrip" style="background-color:#55C1FF;vertical-align: middle;">
+      <ion-col col-12>
+        <h4>{{lastTrip.Destination}}</h4>
+      </ion-col>
+      <ion-col col-6>
+        <h4><ion-icon name="pin"></ion-icon> {{lastTrip.NumberOfLogs}}</h4>
+      </ion-col>
+      <ion-col col-6>
+        <h4><ion-icon name="add"></ion-icon> Registrar</h4>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
   <ion-list>
     <div item-content class="card-background-page" *ngFor="let trip of trips">
       <ion-card>
         <button outline (click)="loadLogs(trip)" class="no-padding">
-              <img [src]="trip.Image"/>
-              <div class="card-title">
-                {{trip.Destination}}
-                </div>
-              <div class="card-subtitle">
-                <ion-badge>Toca para ver {{trip.NumberOfLogs}} registros</ion-badge>
-              </div>
-          </button>
+          <img [src]="trip.Image" />
+          <div class="card-title">
+            {{trip.Destination}}
+          </div>
+          <div class="card-subtitle">
+            <ion-badge>Toca para ver {{trip.NumberOfLogs}} registros</ion-badge>
+          </div>
+        </button>
         <ion-row>
-          <!--<ion-col>
-                <button ion-button icon-left clear small (click)="showTripPhotos(trip.Id)">
-            <ion-icon name="image"></ion-icon>
-            <div>Imágenes</div>
-          </button>
-              </ion-col>-->
           <ion-col>
-            <button clear ion-button icon-left small (click)="addLog(trip.Id)">
-          <ion-icon name="add"></ion-icon>
-          Registrar
-      </button>
+            <button color="card-button-color" clear ion-button icon-left small (click)="addLog(trip.Id)">
+              <ion-icon name="add"></ion-icon>
+              Registrar
+            </button>
           </ion-col>
           <ion-col>
-            <button ion-button icon-left clear small (click)="showTripDetails(trip)">
-          <ion-icon name="eye"></ion-icon>
-          Detalles
-      </button>
+            <button color="card-button-color" ion-button icon-left clear small (click)="showTripDetails(trip)">
+              <ion-icon name="eye"></ion-icon>
+              Detalles
+            </button>
           </ion-col>
-          <!--<ion-col center text-center>
-          <ion-note>
-            11h ago
-          </ion-note>
-        </ion-col>-->
         </ion-row>
       </ion-card>
     </div>
   </ion-list>
-
-
-
-
-
-  <ion-fab right bottom>
-    <button ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
-    <ion-fab-list side="left">
-      <button ion-fab (click)="addTrip()">
-        <ion-icon name="briefcase"></ion-icon>
-      </button>
-
-    </ion-fab-list>
-  </ion-fab>
 </ion-content>
 
 <!--

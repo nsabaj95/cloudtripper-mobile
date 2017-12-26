@@ -12,28 +12,30 @@
       <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <ion-list>
-      <ion-card *ngFor="let log of logs">
-        <ion-item>
-          <ion-avatar item-left>
-            <img src="img/avatar.png">
-          </ion-avatar>
-          <ion-badge *ngIf="log.isNew(lastUpdate)" color="secondary" item-right>nuevo!</ion-badge>
-          <h3><b>{{log.userName}}</b> in <b>{{log.trip}}</b></h3>
-          <p>{{log.date.toLocaleString()}}</p>
-        </ion-item>
-        <ion-item>
-          <h2>{{log.title}}</h2>
-        </ion-item>
-        <ion-card-content>
-          {{log.message}}
-        </ion-card-content>
-        <img *ngIf="log.image" (tap)="showPhoto(log)" [src]="log.image">
-      <button ion-item (click)="logTapped($event, log)" color="primary">
-        <ion-icon *ngIf="log.positionEnabled" name="map" item-left></ion-icon>               
-        <ion-icon *ngIf="log.hasImage" name="image" item-left></ion-icon>               
-        <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright" item-right></ion-icon>
-      </button>
-      </ion-card>
+        <ion-card *ngFor="let log of logs">
+            <!--<ion-item style="background-color:#ced9ff;">-->
+            <ion-item>
+              <ion-avatar item-left>
+                <img *ngIf="log.user.avatar == '' || log.user.avatar == null" src="img/avatar.png">
+                <img *ngIf="log.user.avatar != '' && log.user.avatar != null" style="object-fit: cover;" [src]="log.user.avatar">
+              </ion-avatar>
+              <button item-right ion-button *ngIf="enableEditingPermissions" color="danger" outline (click)="delete(log.id)"> <ion-icon name="trash"></ion-icon></button>
+              <h3><b>{{log.user.getAlias()}}</b> en <b>{{log.trip_destination}}</b></h3>
+              <p>{{log.date}}</p>
+              <p>{{log.address}}</p>
+            </ion-item>
+            <!-- <img *ngIf="log.image" [src]="log.image" (tap)="showPhoto(log.image)"> -->
+            <img *ngIf="log.image" [src]="log.image" (tap)="showPhoto(log)">
+            <ion-card-content>
+              <h2>{{log.title}}</h2>
+              <p>{{log.message}}</p>
+            </ion-card-content>
+            <button ion-item (click)="logTapped($event, log)" color="primary">
+                <!-- <ion-icon *ngIf="log.positionEnabled" name="map" item-left></ion-icon>               
+                <ion-icon *ngIf="log.hasImage" name="image" item-left></ion-icon>                -->
+                <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright" item-right></ion-icon>
+              </button>
+          </ion-card>
     </ion-list>
 
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

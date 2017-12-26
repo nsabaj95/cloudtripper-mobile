@@ -21,14 +21,14 @@ export class LogsService {
   getAllLogs() {
     return this.getLogs("");
   }
-  getAllLogsByTripId(trip_id) {
-    return this.getLogs('?trip_id=' + encodeURIComponent(trip_id));
+  getAllLogsByTripId(trip_id, require_pictures) : Promise<any> {
+    return this.getLogs('?trip_id=' + encodeURIComponent(trip_id) + '&require_pictures=' + require_pictures);
   }
-  getLogsByTripId(skip, take, trip_id) {
-    return this.getLogs('?skip=' + encodeURIComponent(skip) + '&take=' + encodeURIComponent(take) + '&trip_id=' + encodeURIComponent(trip_id));
+  getLogsByTripId(skip, take, trip_id, require_pictures) : Promise<any> {
+    return this.getLogs('?skip=' + encodeURIComponent(skip) + '&take=' + encodeURIComponent(take) + '&trip_id=' + encodeURIComponent(trip_id) + '&require_pictures=' + require_pictures);
   }
-  getLogsBySubscriptorId(skip, take, subscriptor_id, updateDate) {
-    return this.getLogs('?skip=' + encodeURIComponent(skip) + '&take=' + encodeURIComponent(take) + '&subscriptor_id=' + encodeURIComponent(subscriptor_id) + '&updateDate=' + encodeURIComponent(updateDate));
+  getLogsBySubscriptorId(skip, take, subscriptor_id, updateDate, require_pictures) : Promise<any> {
+    return this.getLogs('?skip=' + encodeURIComponent(skip) + '&take=' + encodeURIComponent(take) + '&subscriptor_id=' + encodeURIComponent(subscriptor_id) + '&updateDate=' + encodeURIComponent(updateDate)  + '&require_pictures=' + require_pictures);
   }
 
   uploadImage(title, message, positionEnabled, lat, lng, date, imgUrl, trip_id, address) {
@@ -105,7 +105,7 @@ export class LogsService {
         });
     });
   }
-  private getLogs(data){
+  private getLogs(data):Promise<any>{
     let link = this.apiurl + data;
     return new Promise(resolve => {
       this.http.get(link)

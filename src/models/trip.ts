@@ -1,3 +1,5 @@
+import {User} from '../models/user';
+
 export class Trip {
     Id;
     Active:boolean;
@@ -12,8 +14,8 @@ export class Trip {
     Image;
     NumberOfSubscriptions;
     Subscribed;
-    UserName;
-    constructor(Id, Active,Destination,Origin,StartDate,EndDate,LastUpdate,NumberOfLogs,User_Id,HasImage,Image,NumberOfSubscriptions){
+    user:User;
+    constructor(Id, Active,Destination,Origin,StartDate,EndDate,LastUpdate,NumberOfLogs,User_Id,HasImage,Image,NumberOfSubscriptions,user:User){
         this.Id = Id;
         this.Active = Active;
         this.Destination = Destination;
@@ -26,5 +28,6 @@ export class Trip {
         this.HasImage = HasImage;
         this.Image = Image;
         this.NumberOfSubscriptions = NumberOfSubscriptions;
+        this.user = user;
     }
 }

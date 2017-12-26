@@ -45,6 +45,9 @@ export class MyApp {
       this.usersService = UsersService;
       this.platform.ready().then(() => {
       
+      BackgroundMode.configure({
+        silent:true
+      });
       BackgroundMode.enable();
       Badge.registerPermission();
       console.log(Badge.hasPermission());

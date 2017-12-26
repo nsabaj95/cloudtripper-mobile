@@ -5,6 +5,7 @@ import {LogsService} from '../../providers/logs-service';
 import {UsersService} from '../../providers/users-service';
 import {TripsSubscriptionsService} from '../../providers/trips-subscriptions-service';
 import {Trip} from '../../models/trip';
+import {User} from '../../models/user';
 import {LogHistoryPage} from '../log-history/log-history';
 import {LogYourMomentPage} from '../log-your-moment/log-your-moment';
 import {TripDetailsPage} from '../trip-details/trip-details';
@@ -19,6 +20,7 @@ import {TripMapPage} from '../trip-map/trip-map';
 })
 export class HomePage {
   trips:Trip[] = [];
+  lastTrip:Trip;
   user:any;
   loader:any;
   defaultUrlImage;
@@ -45,8 +47,10 @@ export class HomePage {
     return new Promise(resolve => {
       this.tripsService.getAllTripsByUser(UsersService.currentUser.id).then((trips : any[]) => {
         for(let t of trips) {
-          let trip:Trip = new Trip(t.id, t.active, t.destination, t.origin, new Date(t.startDate), new Date(t.endDate), new Date(t.lastUpdate), t.numberOfLogs, t.user_id, t.hasImage, t.image, t.numberOfSubscriptions);
+          let user:User = new User(t.username, undefined, undefined, undefined, undefined, undefined, t.name);
+          let trip:Trip = new Trip(t.id, t.active, t.destination, t.origin, new Date(t.startDate), new Date(t.endDate), new Date(t.lastUpdate), t.numberOfLogs, t.user_id, t.hasImage, t.image, t.numberOfSubscriptions, user);
           this.trips.push(trip);
+          this.lastTrip = trip;
         }
         this.loader.dismiss();
         resolve(true);

@@ -18,7 +18,7 @@ export class LogDetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, sanitizier:DomSanitizer) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedLog = navParams.get('selectedLog');
-    this.showMaps = this.selectedLog.positionEnabled;
+    this.showMaps = true;
     this.base64Image = this.selectedLog.image;
   }
 

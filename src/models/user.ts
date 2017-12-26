@@ -1,14 +1,4 @@
 export class User {
-    constructor(username, password, id, lastUpdate, facebookid, avatar, name){
-        this.username = username;
-        this.password = password;
-        this.id = id;
-        this.lastUpdate = lastUpdate;
-        this.facebookid = facebookid;
-        this.avatar = avatar;
-        this.name = name;
-    }
-
     id;
     facebookid;
     username:string;
@@ -17,6 +7,19 @@ export class User {
     lastUpdate:string;
     name:string;
     
+    constructor(username, password, id, lastUpdate, facebookid, avatar, name){
+        this.username = username;
+        this.password = password;
+        this.id = id;
+        this.lastUpdate = lastUpdate;
+        this.name = name;
+        this.facebookid = facebookid;
+
+        if(facebookid != undefined && facebookid != '')
+            this.avatar = "https://graph.facebook.com/" + facebookid + "/picture?type=square";
+
+    }
+
     public getAlias(){
         var alias = "";
         if(this.name != "" && this.name != null)

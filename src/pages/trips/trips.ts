@@ -5,6 +5,7 @@ import {TripsSubscriptionsService} from '../../providers/trips-subscriptions-ser
 import {UsersService} from '../../providers/users-service';
 import {LogsService} from '../../providers/logs-service';
 import {Trip} from '../../models/trip';
+import {User} from '../../models/user';
 import {TripDetailsPage} from '../trip-details/trip-details';
 import {TripMapPage} from '../trip-map/trip-map';
 import {LogHistoryPage} from '../log-history/log-history';
@@ -135,8 +136,8 @@ private isTripSubscribed(trip_id){
   }
   private loadTripsList(newTrips){
     for(let t of newTrips) {
-      let trip:Trip = new Trip(t.id, t.active, t.destination, t.origin, new Date(t.startDate), new Date(t.endDate), new Date(t.lastUpdate), t.numberOfLogs, t.user_id, t.hasImage, t.image, t.numberOfSubscriptions);
-      trip.UserName = t.username;
+      let user:User = new User(t.username, undefined, undefined, undefined, undefined, undefined, t.name);
+      let trip:Trip = new Trip(t.id, t.active, t.destination, t.origin, new Date(t.startDate), new Date(t.endDate), new Date(t.lastUpdate), t.numberOfLogs, t.user_id, t.hasImage, t.image, t.numberOfSubscriptions, user);
       if(this.listType == "subscriptions" || this.isTripSubscribed(t.id))
       {
         trip.Subscribed = true;
@@ -164,7 +165,7 @@ private isTripSubscribed(trip_id){
   showTripPhotos(trip_id){
     this.showLoader("Getting trip photos...");
     var images = [];
-    this.logsService.getAllLogsByTripId(trip_id).then((data)=>{
+    this.logsService.getAllLogsByTripId(trip_id, true).then((data)=>{
       var logs = Object.keys(data).map(function(k) { return data[k] })[1];
       for(let l of logs) {
         images.push(l.Image);

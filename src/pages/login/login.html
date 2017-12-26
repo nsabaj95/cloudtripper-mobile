@@ -1,22 +1,22 @@
 
 <ion-content padding class="login-content">
   <div style="text-align:center;height:45%;">
-    <img src="img/icon-l.png" style="margin-top:5%;"/>
+    <img src="img/icon-l.png" style="margin-top:20%;"/>
     <ion-title style="margin-top:10px;">Iniciar sesión</ion-title>
     <!-- <p>O registrarse.</p> -->
   </div>
   <ion-list>
 
-  <ion-item style="opacity:0.8;">
+  <ion-item>
     <ion-label floating>Usuario</ion-label>
     <ion-input type="text" name="username" [(ngModel)]="data.username"></ion-input>
   </ion-item>
 
-  <ion-item style="opacity:0.8;">
+  <ion-item>
     <ion-label floating>Contraseña</ion-label>
     <ion-input type="password" name="password" [(ngModel)]="data.password"></ion-input>
   </ion-item>
-  <ion-item style="opacity:0.8;">
+  <ion-item>
     <ion-label>Recordar mi usuario</ion-label>
     <ion-checkbox [(ngModel)]="rememberMe"></ion-checkbox>
   </ion-item>
@@ -33,7 +33,7 @@
   </ion-row>
   <ion-row>
     <ion-col>
-      <button ion-button block icon-left (click)="facebookLogin()">
+      <button color="facebook" ion-button block icon-left (click)="facebookLogin()">
           <ion-icon name="logo-facebook"></ion-icon>
         Ingresar con Facebook
       </button>

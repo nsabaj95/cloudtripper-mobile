@@ -5,6 +5,7 @@ import {LogsService} from '../../providers/logs-service';
 import {UsersService} from '../../providers/users-service';
 import {TripsSubscriptionsService} from '../../providers/trips-subscriptions-service';
 import {Trip} from '../../models/trip';
+import {User} from '../../models/user';
 import {LogHistoryPage} from '../log-history/log-history';
 import {TripDetailsPage} from '../trip-details/trip-details';
 import {TripMapPage} from '../trip-map/trip-map';
@@ -53,8 +54,8 @@ export class UserPage {
         var trips = data;
         console.log(trips);
         for(let t of trips) {
-          let trip:Trip = new Trip(t.id, t.active, t.destination, t.origin, new Date(t.startDate), new Date(t.endDate), new Date(t.lastUpdate), t.numberOfLogs, t.user_Id, t.hasImage, t.hasImage == 1 ? t.image : "img/trip-default2.jpg", t.numberOfSubscriptions);
-          trip.UserName = t.userName;
+          let user:User = new User(t.username, undefined, undefined, undefined, undefined, undefined, t.name);
+          let trip:Trip = new Trip(t.id, t.active, t.destination, t.origin, new Date(t.startDate), new Date(t.endDate), new Date(t.lastUpdate), t.numberOfLogs, t.user_Id, t.hasImage, t.hasImage == 1 ? t.image : "img/trip-default2.jpg", t.numberOfSubscriptions, user);
           if(this.isTripSubscribed(t.id))
           {
             trip.Subscribed = true;
@@ -103,7 +104,7 @@ export class UserPage {
   showTripPhotos(trip_id){
     this.showLoader("Obteniendo imágenes...");
     var images = [];
-    this.logsService.getAllLogsByTripId(trip_id).then((data:any)=>{
+    this.logsService.getAllLogsByTripId(trip_id, true).then((data:any)=>{
       var logs = data;
       for(let l of logs) {
         images.push(l.image);

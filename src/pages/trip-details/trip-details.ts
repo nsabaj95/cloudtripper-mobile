@@ -40,7 +40,7 @@ export class TripDetailsPage {
   showTripPhotos(){
     this.showLoader("Getting trip photos...");
     var images = [];
-    this.logsService.getAllLogsByTripId(this.selectedTrip.Id).then((data: any[])=>{
+    this.logsService.getAllLogsByTripId(this.selectedTrip.Id, true).then((data: any[])=>{
       console.log(data);
       for(let log of data) {
         images.push(log.image);

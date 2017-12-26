@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController, NavParams,LoadingController} from 'ionic-angular';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import {Log} from '../../models/log';
+import {User} from '../../models/user';
 import {LogsService} from '../../providers/logs-service';
 import {DateTimeHelper} from '../../helpers/dateTimeHelper';
 import {UsersService} from '../../providers/users-service';
@@ -42,7 +43,7 @@ export class NewsPage {
     return new Promise(resolve => {
       UsersService.currentUser.lastUpdate = DateTimeHelper.getUTCDate();
       var updateDate =  DateTimeHelper.getUTCDate();
-      this.logsService.getLogsBySubscriptorId(this.skip, this.take, UsersService.currentUser.id, updateDate).then(data => {
+      this.logsService.getLogsBySubscriptorId(this.skip, this.take, UsersService.currentUser.id, updateDate, true).then(data => {
           TripsSubscriptionsService.numberOfNews = 0;
           this.loadLogsList(data);
           resolve(true);
@@ -81,9 +82,8 @@ export class NewsPage {
     // var minutesOffset:number = new Date().getTimezoneOffset();
     var newLogs = data;
     for(let log of newLogs) {
-      let newLog:Log = new Log(log.id, log.title, log.message, log.locationEnabled == 1 ? true : false, DateTimeHelper.getLocalDateFromUTC(log.date), log.latitude, log.longitude, log.hasImage == 1 ? true : false, log.image,log.address);
-      newLog.userName = log.username;
-      newLog.trip = log.destination;
+      let user:User = new User(log.username, undefined, undefined, undefined, log.facebookid, log.avatar, log.name);
+      let newLog:Log = new Log(log.id, log.title, log.message, log.locationEnabled == 1 ? true : false, DateTimeHelper.getLocalDateFromUTC(log.date), log.latitude, log.longitude, log.hasImage == 1 ? true : false, log.image, log.address, log.destination, user);
       this.logs.push(newLog);
     }
   }

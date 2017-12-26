@@ -5,6 +5,7 @@ import {LogsService} from '../../providers/logs-service';
 import {UsersService} from '../../providers/users-service';
 import {LogDetailsPage} from '../log-details/log-details';
 import {Log} from '../../models/log';
+import {User} from '../../models/user';
 import {DateTimeHelper} from '../../helpers/dateTimeHelper';
 
 declare var google;
@@ -55,12 +56,13 @@ export class LogHistoryPage {
   loadLogs(){
     return new Promise(resolve => {
       if(this.viewMode == 'history'){
-        this.logsService.getLogsByTripId(this.skip, this.take, this.trip.Id).then((data: any[]) => {
+        this.logsService.getLogsByTripId(this.skip, this.take, this.trip.Id, true).then((data: any[]) => {
           this.loadLogsList(data);
           resolve(true);
         }); 
       } else if(this.viewMode == 'map') {
-        this.logsService.getAllLogsByTripId(this.trip.Id).then((data: any[]) => {
+        this.logsService.getAllLogsByTripId(this.trip.Id, false).then((data: any[]) => {
+          console.log(data);
           this.loadLogsList(data);
           resolve(true);
         }); 
@@ -163,9 +165,8 @@ export class LogHistoryPage {
 
   private loadLogsList(newLogs : any[]){
     for(let log of newLogs) {
-      let newLog:Log = new Log(log.id, log.title, log.message, log.locationEnabled == 1 ? true : false, DateTimeHelper.getLocalDateFromUTC(log.date), log.latitude, log.longitude, log.hasImage == 1 ? true : false, log.image, log.address);
-      newLog.userName = log.username != undefined ? log.username : log.name;
-      newLog.trip = log.destination;
+      let user:User = new User(log.username, undefined, undefined, undefined, log.facebookid, log.avatar, log.name);
+      let newLog:Log = new Log(log.id, log.title, log.message, log.locationEnabled == 1 ? true : false, DateTimeHelper.getLocalDateFromUTC(log.date), log.latitude, log.longitude, log.hasImage == 1 ? true : false, log.image, log.address, log.destination, user);
       this.logs.push(newLog);
     }
   }

@@ -13,9 +13,6 @@
     <ion-title>{{selectedLog.title}}</ion-title>
   </ion-item>
   <img [src]="base64Image" (tap)="showPhoto(base64Image)" *ngIf="base64Image" />
-  <ion-list-header>
-    Descripción
-  </ion-list-header>
   <ion-item-group>
     <ion-item text-wrap>
       <!--<ion-icon name="calendar" item-left></ion-icon>-->
@@ -28,9 +25,6 @@
         {{selectedLog.message}}
     </ion-item>
   </ion-item-group>
-  <ion-list-header>
-    Ubicación
-  </ion-list-header>
   <div *ngIf="selectedLog" class="selection">
     <!--<ion-icon name="{{selectedItem.icon}}"></ion-icon>-->
   </div>

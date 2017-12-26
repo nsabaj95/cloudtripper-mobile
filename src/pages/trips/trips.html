@@ -30,7 +30,7 @@
       
         <img [src]="trip.Image"/>
         <div class="card-title">
-          {{trip.UserName}} in {{trip.Destination}}
+          {{trip.user.getAlias()}} en {{trip.Destination}}
         </div>
         <div class="card-subtitle">
           <ion-badge>{{trip.NumberOfLogs}} registros</ion-badge>
